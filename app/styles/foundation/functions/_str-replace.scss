@@ -1,0 +1,23 @@
+@function str-replace($substr, $newsubstr, $str, $all: false) {
+  $index: 1;
+  $result: '';
+
+  @while $index <= str-length($str) {
+    $chunk: str-slice($str, $index, $index + str-length($substr) - 1);
+
+    @if $chunk == $substr {
+      $result: $result + $newsubstr;
+      $index: $index + str-length($substr);
+
+      @if $all == false {
+        $result: $result + str-slice($str, $index);
+        @return $result;
+      }
+    } @else {
+      $result: $result + str-slice($str, $index, $index);
+      $index: $index + 1;
+    }
+  }
+
+  @return $result;
+}

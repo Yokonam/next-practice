@@ -1,0 +1,23 @@
+@mixin hover {
+  @media (any-hover: hover) and (any-pointer: fine) {
+    &:where(:any-link, :enabled, summary):hover {
+      @content;
+    }
+  }
+}
+
+@mixin group-hover {
+  @media (any-hover: hover) and (any-pointer: fine) {
+    :where(:any-link, :enabled, summary):hover & {
+      @content;
+    }
+  }
+}
+
+@mixin general-hover {
+  @media (any-hover: hover) and (any-pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}

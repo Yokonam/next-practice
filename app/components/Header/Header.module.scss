@@ -1,0 +1,29 @@
+@use '@/styles/foundation/functions' as *;
+
+.header {
+  background-color: #fff;
+  color: var(--primary);
+  border: solid 1px var(--border-color);
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.title {
+  font-size: rem(20);
+  font-weight: 900;
+}
+.nav {
+  margin-left: auto;
+  font-weight: 500;
+}
+.list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

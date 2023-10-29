@@ -1,0 +1,18 @@
+@use 'sass:math';
+
+@function rem($font-size-px: 16, $root-font-per: var(--font-ratio)) {
+  @return calc($font-size-px / var(--root-font-size) * var(--font-ratio) * 1rem);
+}
+
+@function em($size: 10, $base: 16) {
+  $value: math.div($size, $base) * 1em;
+  @return $value;
+}
+
+@function max-vw($size: 10) {
+  @return calc(#{$size} / var(--base-max-width) * var(--base-unit));
+}
+
+@function vw($size: 10) {
+  @return calc(#{$size} / var(--base-width) * 100vw);
+}

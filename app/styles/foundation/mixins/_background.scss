@@ -1,0 +1,42 @@
+@use 'sass:math';
+@use '../functions/str-replace' as *;
+
+@mixin ratio-img($url, $extension: '.png') {
+  $ratio-img: str-replace($extension, '@2x' + $extension, $url);
+  background-image: image-set(url($url) 1x, url($ratio-img) 2x);
+}
+
+@mixin fill-screen($bgColor: null, $bgImg: null) {
+  position: relative;
+  padding-right: calc(50vw - 50%);
+  padding-left: calc(50vw - 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-left: calc(-50vw + 50%);
+  @if $bgColor != null {
+    background-color: $bgColor;
+  }
+  @if $bgImg != null {
+    background: url($bgImg);
+  }
+}
+
+@mixin fill-block {
+  position: relative;
+  left: calc(-50vw + 50%);
+  width: 100vw;
+}
+
+@mixin fill-background {
+  position: absolute;
+  top: 0;
+  --x50vw: calc((100vw - var(--scrollbar)) / 2);
+  left: calc(50% - var(--x50vw, 50vw));
+  z-index: -1;
+  width: calc(100vw - var(--scrollbar, 0));
+  height: 100%;
+  content: '';
+}
+
+@mixin gradation($deg: 90deg, $color1: #00d65b, $color2: #009d43) {
+  background-image: linear-gradient($deg, $color1 0%, $color2 100%);
+}

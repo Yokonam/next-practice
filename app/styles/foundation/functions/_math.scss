@@ -1,0 +1,20 @@
+//- べき乗計算
+@function pow($base, $exponent) {
+  @if type-of($base) != 'number' or type-of($exponent) != 'number' {
+    @error "基数と指数は数字でなければなりません。基数: #{$base}, 指数: #{$exponent}を受け取りました。";
+  }
+
+  @if $exponent < 0 {
+    @error "指数は0以上の整数でなければなりません。指数: #{$exponent}を受け取りました。";
+  }
+
+  @if floor($exponent) != $exponent {
+    @error "指数は整数でなければなりません。指数: #{$exponent}を受け取りました。";
+  }
+
+  $result: 1;
+  @for $i from 1 through $exponent {
+    $result: $result * $base;
+  }
+  @return $result;
+}

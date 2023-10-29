@@ -1,0 +1,54 @@
+@use '../functions' as *;
+
+/// Contain Image in Container
+/// @param {Number} $width - Container max width in pixels
+/// @param {Number} $height - Container max height in pixels
+///
+/// Usage:
+///   @include contain-img(16, 9)
+@mixin contain-img($width: null, $height: null) {
+  @if ($width == null and $height == null) {
+    @error "アスペクト比の計算には、幅と高さの両方を指定してください。";
+  } @else if ($width == null) {
+    @error "アスペクト比の計算には幅が必要です。";
+  } @else if ($height == null) {
+    @error "アスペクト比の計算には高さが必要です。";
+  } @else {
+    aspect-ratio: #{$width}/#{$height};
+  }
+
+  overflow: hidden;
+
+  picture,
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+/// Inline Image as Background
+/// @param {String} $image - The file name of the image to inline
+/// Uses PostCSS Assets to convert the image into a data URL and sets it as a background image.
+///
+/// Requirements:
+/// - Ensure PostCSS Assets is properly configured in your build process.
+/// - Ensure the `$image-path` variable is defined in your SCSS configuration.
+///
+/// Usage:
+///   .element {
+///     @include inline-img('example.png');
+///   }
+/// The above SCSS will convert into the following CSS:
+///   .element {
+///     background-image: url(data:image/png;base64,...);
+///   }
+@mixin inline-img($image: null) {
+  @if $image == null {
+    @error "画像のファイル名が必要です。";
+  } @else if type-of($image) != string {
+    @error "文字列を引数として期待していますが、#{type-of($image)}が渡されました。";
+  } @else {
+    background-image: inline($image-path + 'common/_inline/' + $image);
+  }
+}

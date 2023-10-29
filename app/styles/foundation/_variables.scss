@@ -1,0 +1,11 @@
+@use 'sass:math';
+
+//breakpoint
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 876px,
+  lg: 1280px,
+  xl: 1400px,
+  xxl: 1600px
+) !default;
